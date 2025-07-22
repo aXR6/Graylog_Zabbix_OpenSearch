@@ -103,6 +103,7 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock:ro  # para monitoramento de containers, conforme template oficial :contentReference[oaicite:0]{index=0}
     networks:
       zabbix-network:
+        ipv4_address: 172.20.240.10
     depends_on:
       - zabbix-server-pgsql
     restart: unless-stopped
