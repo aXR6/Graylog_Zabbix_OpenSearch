@@ -4,6 +4,9 @@ services:
   mongo:
     image: mongodb/mongodb-community-server:7.0.22-ubi8
     container_name: mongo
+    environment:
+      MONGODB_INITDB_ROOT_USERNAME: ${MONGODB_INITDB_ROOT_USERNAME}
+      MONGODB_INITDB_ROOT_PASSWORD: ${MONGODB_INITDB_ROOT_PASSWORD}
     volumes:
       - mongo_data:/data/db
     networks:
