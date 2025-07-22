@@ -2,7 +2,7 @@ version: '3.8'
 
 services:
   mongo:
-    image: mongodb/mongodb-community-server:latest
+    image: mongodb/mongodb-community-server:7.0.22-ubi8
     container_name: mongo
     volumes:
       - mongo_data:/data/db
@@ -11,7 +11,7 @@ services:
     restart: unless-stopped
 
   opensearch:
-    image: opensearchproject/opensearch:latest
+    image: opensearchproject/opensearch:3.0.0
     container_name: opensearch
     environment:
       - discovery.type=single-node
