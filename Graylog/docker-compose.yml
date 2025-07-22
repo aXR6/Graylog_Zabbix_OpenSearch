@@ -18,7 +18,7 @@ services:
       - http.host=0.0.0.0
       - transport.host=localhost
       - network.host=0.0.0.0
-      - OPENSEARCH_JAVA_OPTS=-Xms1g -Xmx1g
+      - OPENSEARCH_JAVA_OPTS=${OPENSEARCH_JAVA_OPTS}
     ulimits:
       memlock:
         soft: -1
@@ -41,11 +41,11 @@ services:
     volumes:
       - graylog_journal:/usr/share/graylog/data/journal
       - /home/monitoramento/graylog:/etc/graylog/server
-    environment:
-      - GRAYLOG_PASSWORD_SECRET=ZC2L9lDOLfpKPmBp0lmIR-GYW2OXViVBEjJjwSziOMYxVsbK1DuSLjkzDH1qgqHTPXMGFNagHFRmujXDqv5qWrXSnUczV5aA
-      - GRAYLOG_ROOT_PASSWORD_SHA2=498ca8869eff866107dfcc0f1a9f0c5f9cdee019faa52ae03f8aecf91665f4e4
-      - GRAYLOG_HTTP_EXTERNAL_URI=http://127.0.0.1:9000/
-      - GRAYLOG_ELASTICSEARCH_VERSION=7
+      environment:
+        GRAYLOG_PASSWORD_SECRET: ${GRAYLOG_PASSWORD_SECRET}
+        GRAYLOG_ROOT_PASSWORD_SHA2: ${GRAYLOG_ROOT_PASSWORD_SHA2}
+        GRAYLOG_HTTP_EXTERNAL_URI: ${GRAYLOG_HTTP_EXTERNAL_URI}
+        GRAYLOG_ELASTICSEARCH_VERSION: ${GRAYLOG_ELASTICSEARCH_VERSION}
     entrypoint:
       - /usr/bin/tini
       - -- wait-for-it
