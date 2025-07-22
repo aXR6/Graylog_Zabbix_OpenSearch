@@ -12,6 +12,7 @@ Este repositório contém exemplos de `docker-compose` para implantações do **
    ```
 
 2. Ajuste os valores conforme o seu ambiente.
+   Certifique-se de que a variável `GRAYLOG_ELASTICSEARCH_HOSTS` aponte para o serviço do OpenSearch (por exemplo, `http://opensearch:9200`).
 3. Dentro de cada pasta execute `docker-compose up -d` para iniciar os containers.
 
 Os arquivos `.env` armazenam informações sensíveis, como credenciais de banco de dados, e por isso estão listados no `.gitignore`.
