@@ -17,9 +17,9 @@ services:
     image: postgres:latest
     container_name: postgres-server
     environment:
-      POSTGRES_USER: "zxmtsys"
-      POSTGRES_PASSWORD: "1zDkKOq78w"
-      POSTGRES_DB: "zxdb"
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
     volumes:
       - dbzpgsql:/var/lib/postgresql/data
     networks:
@@ -44,11 +44,11 @@ services:
     image: zabbix/zabbix-server-pgsql:alpine-7.4-latest
     container_name: zabbix-server-pgsql
     environment:
-      DB_SERVER_HOST: "postgres-server"
-      POSTGRES_USER: "zxmtsys"
-      POSTGRES_PASSWORD: "1zDkKOq78w"
-      POSTGRES_DB: "zxdb"
-      ZBX_ENABLE_SNMP_TRAPS: "true"
+      DB_SERVER_HOST: ${DB_SERVER_HOST}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
+      ZBX_ENABLE_SNMP_TRAPS: ${ZBX_ENABLE_SNMP_TRAPS}
     volumes:
       - zabbix-snmptraps:/var/lib/zabbix/snmptraps
     networks:
@@ -65,11 +65,11 @@ services:
     image: zabbix/zabbix-web-nginx-pgsql:alpine-7.4-latest
     container_name: zabbix-web-nginx-pgsql
     environment:
-      ZBX_SERVER_HOST: "zabbix-server-pgsql"
-      DB_SERVER_HOST: "postgres-server"
-      POSTGRES_USER: "zxmtsys"
-      POSTGRES_PASSWORD: "1zDkKOq78w"
-      POSTGRES_DB: "zxdb"
+      ZBX_SERVER_HOST: ${ZBX_SERVER_HOST}
+      DB_SERVER_HOST: ${DB_SERVER_HOST}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
     volumes:
       - /etc/ssl/nginx:/etc/ssl/nginx:ro
     networks:
@@ -96,9 +96,9 @@ services:
     image: zabbix/zabbix-agent:latest
     container_name: zabbix-agent
     environment:
-      ZBX_HOSTNAME: "zabbix-agent"
-      ZBX_SERVER_HOST: "zabbix-server-pgsql"
-      ZBX_SERVER_PORT: "10051"
+      ZBX_HOSTNAME: ${ZBX_HOSTNAME}
+      ZBX_SERVER_HOST: ${ZBX_SERVER_HOST}
+      ZBX_SERVER_PORT: ${ZBX_SERVER_PORT}
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock:ro  # para monitoramento de containers, conforme template oficial :contentReference[oaicite:0]{index=0}
     networks:
