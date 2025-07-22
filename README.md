@@ -15,3 +15,22 @@ Este repositório contém exemplos de `docker-compose` para implantações do **
 3. Dentro de cada pasta execute `docker-compose up -d` para iniciar os containers.
 
 Os arquivos `.env` armazenam informações sensíveis, como credenciais de banco de dados, e por isso estão listados no `.gitignore`.
+
+## Solução de problemas
+
+Se o serviço **mongo** não iniciar e os logs exibirem uma mensagem semelhante a:
+
+```
+Unable to read the storage engine metadata file
+```
+
+remova os volumes criados anteriormente para que o contêiner possa inicializar
+com um diretório de dados limpo. Execute:
+
+```bash
+docker-compose down -v
+docker-compose up -d
+```
+
+Isso recria o volume `mongo_data` utilizado pelo MongoDB e normalmente resolve o
+erro.
